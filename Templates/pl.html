@@ -1,0 +1,13 @@
+{% block body %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+			<pre>you need to login first </pre>
+			
+<form action="/player" method="POST">
+  <input type="username" name="username" placeholder="Username">
+  <input type="password" name="password" placeholder="password">
+  <input type="submit" value="Log in">
+</form>
+{% endif %}
+{% endblock %}

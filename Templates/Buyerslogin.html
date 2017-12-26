@@ -1,0 +1,58 @@
+{% extends "navbar.html" %}
+
+
+{% block body %}
+
+<!DOCTYPE html>
+<html>
+<title>BuyersPortal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/w3.css">
+<!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"-->
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('/static/images/ipl.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-jumbo w3-animate-top">Indian Premiere League</h1>
+     <!--form action="/blogin" method='POST'>
+  <div class="form-group"-->
+        
+   {% if session['logged_in'] %}
+    <p>You're logged in already!</p>
+  {% else %}
+      <pre>You need to login first </pre>
+      
+        <form action="/blogin" method="POST">
+        <input type="username" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Log in">
+      </form>
+  {% endif %}
+     
+    
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center w3-text-white">This is Fantasy League And You Be the Ruler</p>
+  </div>
+  <div class="w3-display-bottomleft w3-padding-large">
+    Powered by <a href="http://www.bcci.tv/" target="_blank"><strong>BCCI</strong></a>
+  </div>
+</div>
+
+</body>
+</html>
+
+{% endblock %}

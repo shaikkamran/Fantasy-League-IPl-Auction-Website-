@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<title>Auction</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/w3.css">
+<body>
+
+<!-- Header -->
+ <div class="w3-bar w3-dark-grey w3-round-xlarge "style="width:100%">
+  <a href="/" class="w3-bar-item w3-button">Home</a>
+  <a href="/playerslogin" class="w3-bar-item w3-button">GO To Players Login</a>
+  	
+  <a href="#" class="w3-bar-item w3-button">Auction Rules</a>
+  <a href="#" class="w3-bar-item w3-button">Link 3</a>
+  <a href="/logout" class="w3-bar-item w3-button w3-right">Logout</a>
+  
+</div> 
+<div class="w3-sidebar w3-light-violet w3-col " style="width:6%">
+  <h3 class="">Filters</h3>
+      <div class="w3-dropdown-hover">
+      <button class="w3-button ">Price</button>
+      <div class="w3-dropdown-content  w3-border">
+      <a href="/buyersportal/pricebyhightolow" class="w3-bar-item w3-button">Hightolow</a>
+      <a href="/buyersportal/pricebylowtohigh" class="w3-bar-item w3-button">Lowtohigh</a>
+
+      </div>
+      </div>
+
+      <div class="w3-dropdown-hover">
+      <button class="w3-button ">Name</button>
+      <div class="w3-dropdown-content w3-bar-block w3-border">
+      <a href="/buyersportal/sortbyplayernameasc" class="w3-bar-item w3-button">Orderbyasc</a>
+      <a href="/buyersportal/sortbyplayernamedesc" class="w3-bar-item w3-button">Orderbydesc</a>
+
+      </div>
+      </div>
+</div>
+
+<!-- Page Content -->
+<div style="margin-left:15%">
+
+      <div class="w3-row">
+      <div class="w3-half w3-container w3-mobile w3-light-grey w3-bar-block ">
+      <h2>Just Buy</h2>
+      <div class="w3-container">
+      
+      <!--input class="w3-input w3-border w3-padding" type="text" placeholder="Search for plays.." id="myInput" 
+
+onkeyup="myFunction()"-->
+      <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for playersname.." id="myInp" 
+
+onkeyup="myFunction1()">
+
+      <table class="w3-table-all w3-margin-top" id="myTable">
+      <tr>
+        <th style="width:10%;">Player Name</th>
+        <!--th style="width:30%;">PlaysAs</th-->
+        <th style="width:10%;">Base Price</th>
+        <th style="width:10%;">Bid</th>
+        
+        
+      </tr>
+       {% for i in PlayerPrices %}
+          
+      <tr id="getrow">    
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+
+        
+        <td>
+        <form action="{{ url_for('buyersrequests')}}" method="POST">
+        <input type="text" name="price">
+        {{request.id}}
+        
+        <button type="submit" name="pn" value="{{ i[0]}}" >Add</button>
+        </form>
+        </td>
+
+        <!--td><button type="button" onclick="myFunction()">Request</button>
+         </td-->
+
+
+    <!--td><input type="text"  action="" name="kamran">
+  
+    
+  <button type="submit" class="btn btn-default">Submit</button></td-->
+        
+      </tr> 
+      {% endfor %} 
+      </table>
+      </div>
+      </div>
+      
+
+
+<div class="w3-quarter w3-container w3-light-grey w3-bar-block">
+  
+    <h2>Your Bids</h2>
+    
+    <div class="w3-card-4">
+
+<header class="w3-container w3-green">
+  <h4>Requested Players</h4>
+
+</header>
+
+  {% for j in lis %}
+<div class="w3-container">
+  <p id="message"></p>
+  <p >{{j[1]}}       $     {{j[3]}} </p>
+
+</div>
+{% endfor %}
+
+<footer class="w3-container w3-blue">
+  <h5><form action="{{ url_for('buyersrequeststodb')}}" method="POST">
+        
+        <button type="submit" name="RequestSend"  >SendRequests</button>
+        </form>
+        
+        </h5>
+</footer>
+
+</div>
+</div>
+  
+  <div class="w3-quarter w3-container w3-light-grey w3-bar-block">
+  
+    <h2>Others Bids</h2>
+    
+    <div class="w3-card-4">
+
+        <header class="w3-container w3-green">
+          <h4>Requested Players</h4>
+
+        </header>
+
+        {% for j in otherslis.keys() %}
+        {% for i in otherslis[j] %}
+
+        <div class="w3-container">
+          <p id="message"></p>
+
+          <p >{{i}}</p>
+
+        </div>
+        {% endfor %}
+
+        {% endfor %}
+
+
+
+
+
+</div>
+
+  </div>
+
+
+<script>
+function myFunction1() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInp");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+function myFunction() {
+    var message, x;
+    message = document.getElementById("message");
+    message.innerHTML = "";
+
+      
+    
+}
+
+
+</script>
+
+</body>
+</html>
+     
+    
